@@ -92,7 +92,7 @@ export default function Navbar() {
             : 'bg-white'
         }`}
       >
-        <div className="mx-auto max-w-[1400px] h-[45px] px-8 flex items-center justify-between">
+        <div className="mx-auto max-w-[1400px] h-[65px] px-8 flex items-center justify-between">
           
           {/* Logo */}
           <a href="/" className="flex-shrink-0 group flex items-center">
@@ -100,7 +100,7 @@ export default function Navbar() {
             <img 
               src="/logo.svg" 
               alt="EIMERE Logo" 
-              className="h-[20px] w-auto object-contain transition-transform duration-300 ease-out group-hover:scale-[1.03]"
+              className="h-[28px] w-auto object-contain transition-transform duration-300 ease-out group-hover:scale-[1.03]"
               onError={(e) => {
                 // Fallback if logo not found
                 e.currentTarget.style.display = 'none';
@@ -135,7 +135,7 @@ export default function Navbar() {
                 </a>
                 
                 {/* Underline Animation */}
-                <span className={`absolute left-1/2 -translate-x-1/2 bottom-0 h-[2px] bg-blue-600 transition-all duration-300 ease-in-out ${
+                <span className={`absolute left-1/2 -translate-x-1/2 bottom-0 h-[2px] bg-black transition-all duration-300 ease-in-out ${
                   link.isActive ? 'w-full' : 'w-0 group-hover:w-full'
                 }`} />
                 
