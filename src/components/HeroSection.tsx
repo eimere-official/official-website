@@ -114,7 +114,7 @@ export default function HeroSection() {
           transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
           className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.15] tracking-tight text-[#111827] mb-6 max-w-4xl"
         >
-          Technology That Moves <span className="text-gray-600 font-medium">as Fast as Your Business Does.</span>
+          Where Business <span className="text-gray-600 font-medium">meets Innovation</span>
         </motion.h1>
 
         {/* Subheading */}
