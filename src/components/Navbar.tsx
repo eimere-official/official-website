@@ -277,34 +277,23 @@ export default function Navbar() {
                 >
                   {navLinks.map((link) => (
                     <motion.div key={link.name} variants={itemVariants}>
-                      <div 
-                        className="flex items-center justify-between cursor-pointer group"
-                        onClick={() => {
-                          if (link.hasDropdown) {
-                            setMobileServicesOpen(!mobileServicesOpen);
-                          } else {
-                            setIsMobileMenuOpen(false);
-                          }
-                        }}
-                      >
+                      <div className="flex items-center justify-between group">
                         <a
                           href={link.href}
                           className={`text-[17px] font-medium transition-colors ${
-                            link.isActive ? 'text-blue-600' : 'text-gray-900 group-hover:text-blue-600'
+                            link.isActive ? 'text-gray-900 font-semibold' : 'text-gray-900'
                           }`}
-                          onClick={(e) => {
-                            if (link.hasDropdown) {
-                              e.preventDefault();
-                              setMobileServicesOpen(!mobileServicesOpen);
-                            } else {
-                              setIsMobileMenuOpen(false);
-                            }
+                          onClick={() => {
+                            if (!link.hasDropdown) setIsMobileMenuOpen(false);
                           }}
                         >
                           {link.name}
                         </a>
                         {link.hasDropdown && (
-                          <button className="text-gray-500">
+                          <button
+                            className="text-gray-500 p-1"
+                            onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                          >
                             {mobileServicesOpen ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
                           </button>
                         )}

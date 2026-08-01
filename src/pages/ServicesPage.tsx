@@ -31,21 +31,21 @@ export default function ServicesPage() {
     <div className="min-h-screen bg-[#fafafa]">
 
       {/* Hero */}
-      <section className="min-h-[85vh] flex items-end px-6 sm:px-12 lg:px-20 pb-20 pt-32">
+      <section className="pt-28 pb-12 sm:pt-36 sm:pb-20 px-5 sm:px-12 lg:px-20">
         <div className="max-w-[1400px] mx-auto w-full">
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-sm text-gray-400 mb-6"
+            className="text-xs sm:text-sm font-semibold tracking-wider text-gray-400 uppercase mb-4 sm:mb-6"
           >
             Services
           </motion.p>
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-            className="text-[clamp(2.5rem,6vw,5.5rem)] font-bold leading-[1.05] tracking-tight text-gray-900 max-w-4xl"
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+            className="text-3xl sm:text-5xl lg:text-[5.25rem] font-extrabold leading-[1.08] tracking-tight text-gray-900 max-w-4xl"
           >
             We help companies design, build, and scale digital products.
           </motion.h1>
@@ -56,14 +56,14 @@ export default function ServicesPage() {
       <motion.div
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
-        transition={{ duration: 0.8, delay: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-        className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-20 origin-left"
+        transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+        className="max-w-[1400px] mx-auto px-5 sm:px-12 lg:px-20 origin-left"
       >
         <div className="h-px bg-gray-200" />
       </motion.div>
 
       {/* Services Accordion */}
-      <section className="px-6 sm:px-12 lg:px-20 py-20">
+      <section className="px-5 sm:px-12 lg:px-20 py-12 sm:py-20">
         <div className="max-w-[1400px] mx-auto">
           {serviceCategories.map((category, catIdx) => {
             const isExpanded = expandedCat === category.id;
@@ -76,24 +76,24 @@ export default function ServicesPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.4, delay: catIdx * 0.04 }}
-                className="border-b border-gray-200 scroll-mt-28"
+                className="border-b border-gray-200 scroll-mt-24"
               >
                 <button
                   onClick={() => toggleCategory(category.id)}
-                  className="w-full text-left py-7 sm:py-9 flex items-center justify-between gap-8 group"
+                  className="w-full text-left py-6 sm:py-9 flex items-center justify-between gap-4 sm:gap-8 group"
                 >
-                  <h2 className={`text-2xl sm:text-3xl lg:text-[2.5rem] font-semibold tracking-tight transition-colors duration-200 ${
+                  <h2 className={`text-xl sm:text-3xl lg:text-[2.5rem] font-bold tracking-tight transition-colors duration-200 ${
                     isExpanded ? 'text-gray-900' : 'text-gray-400 group-hover:text-gray-900'
                   }`}>
                     {category.title}
                   </h2>
 
-                  <div className={`w-9 h-9 rounded-full border flex items-center justify-center shrink-0 transition-all duration-200 ${
+                  <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full border flex items-center justify-center shrink-0 transition-all duration-200 ${
                     isExpanded
                       ? 'border-gray-900 bg-gray-900 text-white'
                       : 'border-gray-300 text-gray-400 group-hover:border-gray-900 group-hover:text-gray-900'
                   }`}>
-                    {isExpanded ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                    {isExpanded ? <Minus className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Plus className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
                   </div>
                 </button>
 
@@ -106,17 +106,17 @@ export default function ServicesPage() {
                       transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
                       className="overflow-hidden"
                     >
-                      <div className="pb-12 pt-2">
+                      <div className="pb-10 pt-2">
                         <motion.p
                           initial={{ opacity: 0, y: 8 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.3, delay: 0.05 }}
-                          className="text-base text-gray-500 leading-relaxed max-w-2xl mb-10"
+                          className="text-sm sm:text-base text-gray-500 leading-relaxed max-w-2xl mb-8 sm:mb-10"
                         >
                           {category.description}
                         </motion.p>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 sm:gap-y-8">
                           {category.items.map((item, i) => (
                             <motion.div
                               key={i}
@@ -124,10 +124,10 @@ export default function ServicesPage() {
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ duration: 0.3, delay: 0.08 + i * 0.04 }}
                             >
-                              <h3 className="text-base font-semibold text-gray-900 mb-1">
+                              <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-1">
                                 {item.title}
                               </h3>
-                              <p className="text-sm text-gray-400 leading-relaxed">
+                              <p className="text-xs sm:text-sm text-gray-400 leading-relaxed">
                                 {item.description}
                               </p>
                             </motion.div>
@@ -139,10 +139,10 @@ export default function ServicesPage() {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 0.3, delay: 0.3 }}
-                            className="mt-10 pt-6 border-t border-gray-100"
+                            className="mt-8 sm:mt-10 pt-5 sm:pt-6 border-t border-gray-100"
                           >
-                            <p className="text-xs text-gray-300 uppercase tracking-wider mb-3">Technologies</p>
-                            <p className="text-sm text-gray-400">
+                            <p className="text-[11px] font-semibold text-gray-300 uppercase tracking-wider mb-2">Technologies</p>
+                            <p className="text-xs sm:text-sm text-gray-400">
                               {category.techStack.join(' · ')}
                             </p>
                           </motion.div>
@@ -157,8 +157,8 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Startup Launch Pack — Single Full Screen Layout */}
-      <section className="relative min-h-screen flex flex-col justify-center px-6 sm:px-12 lg:px-20 py-16 bg-black text-white overflow-hidden">
+      {/* Startup Launch Pack */}
+      <section className="px-5 sm:px-12 lg:px-20 py-16 sm:py-24 bg-black text-white">
         <div className="max-w-[1400px] mx-auto w-full">
           {/* Header & Overview */}
           <motion.div
@@ -198,7 +198,7 @@ export default function ServicesPage() {
             </div>
           </motion.div>
 
-          {/* Deliverables Grid — 2 columns fitting cleanly on 1 screen */}
+          {/* Deliverables Grid */}
           <div className="pt-10">
             <p className="text-xs text-gray-500 uppercase tracking-wider mb-6">What's included in the pack</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-3">
@@ -226,23 +226,23 @@ export default function ServicesPage() {
       </section>
 
       {/* Contact CTA */}
-      <section id="contact" className="px-6 sm:px-12 lg:px-20 py-28 bg-[#fafafa]">
+      <section id="contact" className="px-5 sm:px-12 lg:px-20 py-20 sm:py-28 bg-[#fafafa]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.5 }}
-          className="max-w-[1400px] mx-auto flex flex-col lg:flex-row lg:items-end justify-between gap-10"
+          className="max-w-[1400px] mx-auto flex flex-col lg:flex-row lg:items-end justify-between gap-8 sm:gap-10"
         >
           <div>
-            <p className="text-sm text-gray-400 mb-4">Get in touch</p>
+            <p className="text-xs sm:text-sm text-gray-400 mb-3 sm:mb-4">Get in touch</p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight leading-tight">
               Have a project in mind?
             </h2>
           </div>
           <a
             href="mailto:contact@eimere.com"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gray-900 text-white text-sm font-medium hover:bg-black transition-colors shrink-0"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gray-900 text-white text-sm font-medium hover:bg-black transition-colors shrink-0 self-start lg:self-auto"
           >
             Contact us <ArrowRight className="w-4 h-4" />
           </a>
