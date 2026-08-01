@@ -45,12 +45,12 @@ export const serviceCategories: ServiceCategory[] = [
     color: 'from-blue-500 to-indigo-600',
     bgGradient: 'bg-gradient-to-br from-blue-50/50 to-indigo-50/30 dark:from-blue-950/20 dark:to-indigo-950/10',
     items: [
-      { title: 'Website Development', description: 'Blazing fast, SEO-optimized corporate websites and web portals.' },
-      { title: 'Web Application Development', description: 'Interactive, modern web apps powered by React, Next.js, and Node.' },
-      { title: 'Mobile App Development (Android & iOS)', description: 'Native & cross-platform apps (Flutter/React Native) delivering smooth UX.' },
-      { title: 'Custom Software Development', description: 'Tailor-made backend architecture and business platforms built to scale.' },
-      { title: 'E-commerce Solutions', description: 'High-converting online stores built on Shopify, WooCommerce, or headless platforms.' },
-      { title: 'SaaS Product Development', description: 'End-to-end multi-tenant SaaS architecture, subscription engines & dashboards.' },
+      { title: 'Website Development', description: 'Blazing-fast, SEO-optimized corporate websites and web portals engineered to scale.' },
+      { title: 'Web Application Development', description: 'Interactive web applications powered by React, Next.js, and Node.js.' },
+      { title: 'Mobile App Development (Android & iOS)', description: 'Native-quality iOS and Android apps built with Flutter and React Native.' },
+      { title: 'Custom Software Development', description: 'Tailor-made backend architecture and enterprise business platforms.' },
+      { title: 'E-commerce Solutions', description: 'High-converting online stores built on Shopify, WooCommerce, or headless storefronts.' },
+      { title: 'SaaS Product Development', description: 'End-to-end multi-tenant SaaS architecture, subscription engines, and analytics dashboards.' },
       { title: 'API Development & Integration', description: 'RESTful & GraphQL APIs with secure endpoints and third-party integrations.' }
     ],
     keyBenefits: [
@@ -73,12 +73,12 @@ export const serviceCategories: ServiceCategory[] = [
     items: [
       { title: 'AI Chatbots', description: 'Conversational AI assistants integrated into web, WhatsApp, and internal systems.', isPopular: true },
       { title: 'RAG-Based Applications', description: 'Retrieval-Augmented Generation connecting LLMs to your private document vaults.' },
-      { title: 'AI Agents', description: 'Autonomous agents capable of tool-use, browser navigation, and complex tasks.' },
-      { title: 'Workflow Automation', description: 'AI-driven task execution to reduce manual workload by up to 80%.' },
-      { title: 'Machine Learning Models', description: 'Custom classification, regression, and clustering models tailored to your business data.' },
+      { title: 'AI Agents', description: 'Autonomous agents capable of tool-use, browser navigation, and complex workflows.' },
+      { title: 'Workflow Automation', description: 'AI-driven task execution to reduce manual operational workload by up to 80%.' },
+      { title: 'Machine Learning Models', description: 'Custom classification, regression, and clustering models tailored to your data.' },
       { title: 'Deep Learning Models', description: 'Neural networks for advanced pattern recognition and complex predictions.' },
       { title: 'Computer Vision Solutions', description: 'Image processing, object detection, and visual inspection algorithms.' },
-      { title: 'Natural Language Processing (NLP)', description: 'Text extraction, sentiment analysis, entity extraction, and automated document parsing.' },
+      { title: 'Natural Language Processing (NLP)', description: 'Text extraction, sentiment analysis, entity extraction, and automated doc parsing.' },
       { title: 'Predictive Analytics', description: 'Forecast demand, churn, and revenue with high-precision statistical models.' },
       { title: 'Recommendation Systems', description: 'Personalized content and product recommendation algorithms.' }
     ],
@@ -101,7 +101,7 @@ export const serviceCategories: ServiceCategory[] = [
     items: [
       { title: 'Data Analytics', description: 'Exploratory analysis uncovering trends, anomalies, and operational insights.' },
       { title: 'Business Intelligence', description: 'Unified BI strategies enabling data-driven organizational cultures.' },
-      { title: 'Interactive Dashboards', description: 'Live executive dashboards in Tableau, PowerBI, or custom React interfaces.' },
+      { title: 'Interactive Dashboards', description: 'Live executive dashboards in Tableau, Power BI, or custom React interfaces.' },
       { title: 'Data Engineering', description: 'Scalable data warehouse architectures designed for high-concurrency querying.' },
       { title: 'Reporting & Visualization', description: 'Automated recurring reports delivered straight to Slack, Email, or Web.' }
     ],

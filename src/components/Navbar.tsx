@@ -1,16 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Code2,
-  Bot,
-  BarChart3,
-  Cloud, 
-  ShieldCheck,
-  Palette, 
-  TrendingUp, 
-  Briefcase,
-  Workflow,
-  Wrench,
   ChevronDown,
   Menu,
   X,
@@ -18,24 +8,12 @@ import {
   Minus
 } from 'lucide-react';
 import { FaLinkedinIn, FaInstagram, FaFacebookF, FaXTwitter } from 'react-icons/fa6';
-
-const services = [
-  { name: 'Development', icon: Code2, description: 'Web, mobile, SaaS & custom software.' },
-  { name: 'AI Solutions', icon: Bot, description: 'Chatbots, RAG, AI agents & ML models.' },
-  { name: 'Data & Analytics', icon: BarChart3, description: 'Dashboards, BI & data engineering.' },
-  { name: 'Cloud & DevOps', icon: Cloud, description: 'AWS, Azure, GCP, CI/CD & Kubernetes.' },
-  { name: 'Cybersecurity', icon: ShieldCheck, description: 'Audits, pen testing & IAM.' },
-  { name: 'UI/UX & Brand Design', icon: Palette, description: 'Product design & brand identity.' },
-  { name: 'Growth & Marketing', icon: TrendingUp, description: 'SEO, performance & content marketing.' },
-  { name: 'Business Consulting', icon: Briefcase, description: 'Tech strategy & fractional CTO.' },
-  { name: 'Business Automation', icon: Workflow, description: 'CRM, WhatsApp & AI workflow automation.' },
-  { name: 'Managed Services', icon: Wrench, description: 'Maintenance, support & cloud ops.' },
-];
+import { serviceCategories } from '../data/servicesData';
 
 const navLinks = [
   { name: 'Home', href: '/#home', isActive: true },
   { name: 'About Us', href: '/#about' },
-  { name: 'Services', href: '/#services', hasDropdown: true },
+  { name: 'Services', href: '/services', hasDropdown: true },
   { name: 'Contact', href: '/#contact' },
 ];
 
@@ -65,6 +43,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [mobileExpandedCat, setMobileExpandedCat] = useState<string | null>(null);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
   useEffect(() => {
@@ -100,18 +79,15 @@ export default function Navbar() {
           
           {/* Logo */}
           <a href="/" className="flex-shrink-0 group flex items-center">
-            {/* Replace with actual image source */}
             <img 
               src="/logo.svg" 
               alt="EIMERE Logo" 
               className="h-[28px] w-auto object-contain transition-transform duration-300 ease-out group-hover:scale-[1.03]"
               onError={(e) => {
-                // Fallback if logo not found
                 e.currentTarget.style.display = 'none';
                 e.currentTarget.nextElementSibling?.classList.remove('hidden');
               }}
             />
-            {/* Fallback Text Logo */}
             <span className="hidden text-2xl font-bold tracking-widest text-gray-900 font-inter transition-all duration-300 ease-out group-hover:tracking-[0.15em] group-hover:text-blue-600">
               EIMERE
             </span>
@@ -143,7 +119,7 @@ export default function Navbar() {
                   link.isActive ? 'w-full' : 'w-0 group-hover:w-full'
                 }`} />
                 
-                {/* Desktop Dropdown */}
+                {/* Full Mega Menu: All Categories + All Sub-services listed directly underneath */}
                 {link.hasDropdown && (
                   <AnimatePresence>
                     {activeDropdown === link.name && (
@@ -152,24 +128,70 @@ export default function Navbar() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.25, ease: "easeOut" }}
-                        className="absolute left-1/2 -translate-x-1/2 top-full mt-4 w-[600px] bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden"
+                        className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-[1160px] max-w-[95vw] bg-white rounded-2xl shadow-2xl border border-gray-100 p-7 overflow-hidden"
                       >
-                        <div className="p-5 grid grid-cols-2 gap-2">
-                          {services.map((service, idx) => (
-                            <a 
-                              key={idx} 
-                              href={`/#services`}
-                              className="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors duration-200 group/item"
-                            >
-                              <div className="mt-0.5 w-8 h-8 bg-[#F3F4F6] rounded-lg flex items-center justify-center shrink-0 group-hover/item:bg-[#111827] transition-colors">
-                                <service.icon className="w-4 h-4 text-[#111827] group-hover/item:text-white transition-colors" strokeWidth={1.75} />
+                        {/* Top Header Bar */}
+                        <div className="flex items-center justify-between pb-4 mb-6 border-b border-gray-100">
+                          <div className="flex items-center gap-3">
+                            <h3 className="text-sm font-bold text-gray-950">Technology Services</h3>
+                            <span className="text-xs text-gray-400">· 10 Specialized Pillars</span>
+                          </div>
+                          <a
+                            href="/services"
+                            onClick={() => setActiveDropdown(null)}
+                            className="text-xs font-semibold text-gray-900 hover:text-black transition-colors"
+                          >
+                            Explore All Services &rarr;
+                          </a>
+                        </div>
+
+                        {/* 10 Categories in a 5-Column Grid with Spacious Typography */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-7 gap-y-7">
+                          {serviceCategories.map((cat) => {
+                            const Icon = cat.icon;
+                            const mainItems = cat.items.slice(0, 3);
+                            const remainingCount = cat.items.length - 3;
+
+                            return (
+                              <div key={cat.id} className="space-y-2.5">
+                                {/* Category Title */}
+                                <a
+                                  href={`/services#cat-${cat.id}`}
+                                  onClick={() => setActiveDropdown(null)}
+                                  className="group flex items-center gap-2 font-bold text-[13px] text-gray-950 hover:text-black transition-colors pb-1 border-b border-gray-100"
+                                >
+                                  <div className="w-6 h-6 rounded-md bg-gray-100 flex items-center justify-center shrink-0 group-hover:bg-gray-900 group-hover:text-white transition-colors">
+                                    <Icon className="w-3.5 h-3.5 text-gray-700 group-hover:text-white" strokeWidth={1.75} />
+                                  </div>
+                                  <span className="truncate">{cat.title}</span>
+                                </a>
+
+                                {/* Featured Key Services */}
+                                <div className="space-y-1 pl-0.5">
+                                  {mainItems.map((sub, idx) => (
+                                    <a
+                                      key={idx}
+                                      href={`/services#cat-${cat.id}`}
+                                      onClick={() => setActiveDropdown(null)}
+                                      className="block text-[12.5px] text-gray-500 hover:text-gray-950 transition-colors line-clamp-1 py-0.5"
+                                      title={sub.title}
+                                    >
+                                      {sub.title}
+                                    </a>
+                                  ))}
+                                  {remainingCount > 0 && (
+                                    <a
+                                      href={`/services#cat-${cat.id}`}
+                                      onClick={() => setActiveDropdown(null)}
+                                      className="inline-block text-[11px] font-semibold text-gray-400 hover:text-gray-950 transition-colors pt-0.5"
+                                    >
+                                      +{remainingCount} more &rarr;
+                                    </a>
+                                  )}
+                                </div>
                               </div>
-                              <div>
-                                <h4 className="text-[14px] font-semibold text-gray-900 mb-0.5">{service.name}</h4>
-                                <p className="text-[12px] text-gray-400 line-clamp-1">{service.description}</p>
-                              </div>
-                            </a>
-                          ))}
+                            );
+                          })}
                         </div>
                       </motion.div>
                     )}
@@ -181,13 +203,12 @@ export default function Navbar() {
 
           {/* Right side: Button + Social Icons */}
           <div className="hidden lg:flex items-center gap-8">
-            {/* Unique CTA Button */}
             <a href="/#contact" className="relative px-5 py-1.5 text-[15px] font-medium text-white rounded-full bg-gray-900 group overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center">
               <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out" />
               <span className="relative z-10">Get Started</span>
             </a>
 
-            {/* Social Icons (Desktop) */}
+            {/* Social Icons */}
             <div className="flex items-center gap-6">
               {socialLinks.map((social, idx) => {
                 const Icon = social.icon;
@@ -207,7 +228,7 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Mobile Menu Toggle (Right on mobile) */}
+          {/* Mobile Menu Toggle */}
           <button 
             className="lg:hidden text-gray-900 p-2 -mr-2 flex items-center justify-center"
             onClick={() => setIsMobileMenuOpen(true)}
@@ -266,11 +287,22 @@ export default function Navbar() {
                           }
                         }}
                       >
-                        <span className={`text-[17px] font-medium transition-colors ${
-                          link.isActive ? 'text-blue-600' : 'text-gray-900 group-hover:text-blue-600'
-                        }`}>
+                        <a
+                          href={link.href}
+                          className={`text-[17px] font-medium transition-colors ${
+                            link.isActive ? 'text-blue-600' : 'text-gray-900 group-hover:text-blue-600'
+                          }`}
+                          onClick={(e) => {
+                            if (link.hasDropdown) {
+                              e.preventDefault();
+                              setMobileServicesOpen(!mobileServicesOpen);
+                            } else {
+                              setIsMobileMenuOpen(false);
+                            }
+                          }}
+                        >
                           {link.name}
-                        </span>
+                        </a>
                         {link.hasDropdown && (
                           <button className="text-gray-500">
                             {mobileServicesOpen ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
@@ -278,7 +310,7 @@ export default function Navbar() {
                         )}
                       </div>
                       
-                      {/* Mobile Dropdown */}
+                      {/* Mobile Dropdown — All Categories & All Sub-services */}
                       {link.hasDropdown && (
                         <AnimatePresence>
                           {mobileServicesOpen && (
@@ -289,14 +321,31 @@ export default function Navbar() {
                               className="overflow-hidden"
                             >
                               <div className="flex flex-col gap-4 pt-4 pb-2 pl-4 border-l border-gray-100 ml-2 mt-2">
-                                {services.map((service, sIdx) => (
-                                  <a 
-                                    key={sIdx} 
-                                    href={`/services/${service.name.toLowerCase().replace(/[\s/]+/g, '-')}`}
-                                    className="text-[15px] text-gray-600 hover:text-blue-600 transition-colors"
-                                  >
-                                    {service.name}
-                                  </a>
+                                {serviceCategories.map((cat) => (
+                                  <div key={cat.id} className="space-y-1">
+                                    <div
+                                      onClick={() => setMobileExpandedCat(mobileExpandedCat === cat.id ? null : cat.id)}
+                                      className="flex items-center justify-between cursor-pointer text-sm font-semibold text-gray-800 py-1"
+                                    >
+                                      <span>{cat.title}</span>
+                                      <Plus className={`w-3.5 h-3.5 transition-transform ${mobileExpandedCat === cat.id ? 'rotate-45' : ''}`} />
+                                    </div>
+
+                                    {mobileExpandedCat === cat.id && (
+                                      <div className="pl-3 space-y-1 py-1 border-l border-gray-200">
+                                        {cat.items.map((sub, sIdx) => (
+                                          <a
+                                            key={sIdx}
+                                            href={`/services#cat-${cat.id}`}
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                            className="block text-xs text-gray-500 hover:text-gray-900 py-0.5"
+                                          >
+                                            {sub.title}
+                                          </a>
+                                        ))}
+                                      </div>
+                                    )}
+                                  </div>
                                 ))}
                               </div>
                             </motion.div>
