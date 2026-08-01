@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
+import ServicesPage from './pages/ServicesPage';
 import PlaceholderPage from './pages/PlaceholderPage';
 import Footer from './components/Footer';
 
@@ -35,7 +36,7 @@ function App() {
         <div className="flex-grow">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/services" element={<PlaceholderPage />} />
+            <Route path="/services" element={<ServicesPage />} />
             <Route path="/services/:id" element={<PlaceholderPage />} />
             <Route path="/industries" element={<PlaceholderPage />} />
             <Route path="/industries/:id" element={<PlaceholderPage />} />
