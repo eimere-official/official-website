@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Plus, X } from 'lucide-react';
+import { ArrowRight, Plus } from 'lucide-react';
 import { serviceCategories, startupLaunchPack, type ServiceCategory } from '../data/servicesData';
 
 // ─── Individual Service Row (Accordion) ───────────────────────────────────────
@@ -12,20 +12,9 @@ function ServiceRow({
   index: number;
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [showBreakdown, setShowBreakdown] = useState(false);
 
   const Icon = category.icon;
   const num = String(index + 1).padStart(2, '0');
-
-  const handleToggle = () => {
-    setIsOpen(prev => {
-      if (prev) {
-        // Closing — reset breakdown too
-        setShowBreakdown(false);
-      }
-      return !prev;
-    });
-  };
 
   return (
     <motion.div
@@ -37,11 +26,11 @@ function ServiceRow({
     >
       {/* ── Clickable Row Header ── */}
       <button
-        onClick={handleToggle}
+        onClick={() => setIsOpen(!isOpen)}
         className="w-full text-left group"
         aria-expanded={isOpen}
       >
-        <div className={`flex items-center gap-5 sm:gap-8 py-6 px-2 sm:px-4 transition-colors duration-200 ${isOpen ? 'bg-[#F7F7F8]' : 'hover:bg-[#F7F7F8]'}`}>
+        <div className={`flex items-center gap-5 sm:gap-8 py-5 px-3 sm:px-5 transition-colors duration-200 ${isOpen ? 'bg-[#F7F7F8]' : 'hover:bg-[#F7F7F8]'}`}>
           {/* Number */}
           <span className="text-sm font-mono text-gray-300 shrink-0 w-7 select-none">
             {num}
@@ -104,113 +93,27 @@ function ServiceRow({
             transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
             className="overflow-hidden"
           >
-            <div className="bg-[#F7F7F8] border-t border-gray-100">
-              <div className="px-4 sm:px-6 lg:px-10 py-8">
-
-                {/* Tagline */}
-                <p className="text-sm text-gray-500 mb-7 max-w-2xl leading-relaxed">
-                  {category.description}
-                </p>
-
-                {/* Sub-services Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-                  {category.items.map((item, i) => (
-                    <div key={i} className="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100">
-                      <span className="w-1.5 h-1.5 rounded-full bg-gray-400 mt-2 shrink-0" />
-                      <div>
-                        <p className="text-sm font-semibold text-[#111827] leading-snug">
-                          {item.title}
-                          {item.isPopular && (
-                            <span className="ml-2 text-[10px] font-bold text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">Popular</span>
-                          )}
-                        </p>
-                        {item.description && (
-                          <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{item.description}</p>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Show Detailed Breakdown CTA */}
-                {!showBreakdown ? (
-                  <button
-                    onClick={() => setShowBreakdown(true)}
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-[#111827] transition-colors group/btn"
+            <div className="bg-[#F7F7F8] border-t border-gray-100 px-4 sm:px-6 lg:px-10 py-6">
+              {/* Sub-services Grid (Only Service Names) */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {category.items.map((item, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center justify-between gap-3 bg-white rounded-xl px-4 py-3 border border-gray-100 shadow-2xs hover:border-gray-200 transition-all"
                   >
-                    <span className="underline underline-offset-4">Show Detailed Breakdown</span>
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                  </button>
-                ) : (
-                  <AnimatePresence>
-                    <motion.div
-                      key="breakdown"
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 8 }}
-                      transition={{ duration: 0.25 }}
-                      className="space-y-6"
-                    >
-                      {/* Divider */}
-                      <div className="border-t border-gray-200 pt-6">
-
-                        {/* Key Benefits */}
-                        {category.keyBenefits && (
-                          <div className="mb-6">
-                            <p className="text-xs font-semibold tracking-widest text-gray-400 uppercase mb-3">
-                              Key Outcomes
-                            </p>
-                            <ul className="space-y-2">
-                              {category.keyBenefits.map((b, i) => (
-                                <li key={i} className="flex items-start gap-2.5 text-sm text-gray-600">
-                                  <span className="w-1 h-1 rounded-full bg-gray-400 mt-2 shrink-0" />
-                                  {b}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-
-                        {/* Tech Stack */}
-                        {category.techStack && (
-                          <div className="mb-6">
-                            <p className="text-xs font-semibold tracking-widest text-gray-400 uppercase mb-3">
-                              Technologies & Tools
-                            </p>
-                            <div className="flex flex-wrap gap-2">
-                              {category.techStack.map((t, i) => (
-                                <span
-                                  key={i}
-                                  className="px-3 py-1 text-xs font-medium text-gray-600 bg-white border border-gray-200 rounded-full"
-                                >
-                                  {t}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-
-                        {/* CTA */}
-                        <div className="flex items-center gap-4 pt-2">
-                          <a
-                            href="#contact"
-                            className="inline-flex items-center gap-2 px-7 py-3 bg-[#111827] hover:bg-black text-white text-sm font-semibold rounded-full transition-colors"
-                          >
-                            Start a Conversation
-                            <ArrowRight className="w-4 h-4" />
-                          </a>
-                          <button
-                            onClick={() => setShowBreakdown(false)}
-                            className="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-gray-600 transition-colors"
-                          >
-                            <X className="w-3.5 h-3.5" />
-                            Collapse
-                          </button>
-                        </div>
-                      </div>
-                    </motion.div>
-                  </AnimatePresence>
-                )}
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#111827] shrink-0" />
+                      <span className="text-sm font-medium text-gray-900 leading-snug truncate">
+                        {item.title}
+                      </span>
+                    </div>
+                    {item.isPopular && (
+                      <span className="text-[10px] font-semibold text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full shrink-0">
+                        Popular
+                      </span>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           </motion.div>
@@ -308,7 +211,7 @@ export default function ServicesLandingSection() {
                 </p>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6">
                   {startupLaunchPack.deliverables.map((d, i) => (
-                    <li key={i} className="flex items-center gap-2.5 text-sm text-white/80 not-italic no-underline">
+                    <li key={i} className="flex items-center gap-2.5 text-sm text-white/80">
                       <span className="w-1.5 h-1.5 rounded-full bg-white/30 shrink-0" />
                       {d}
                     </li>
