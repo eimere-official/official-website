@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Monitor, 
-  Smartphone, 
-  Palette, 
-  BrainCircuit, 
-  LineChart, 
+  Code2,
+  Bot,
+  BarChart3,
   Cloud, 
-  Target, 
+  ShieldCheck,
+  Palette, 
+  TrendingUp, 
   Briefcase,
+  Workflow,
+  Wrench,
   ChevronDown,
   Menu,
   X,
@@ -18,20 +20,22 @@ import {
 import { FaLinkedinIn, FaInstagram, FaFacebookF, FaXTwitter } from 'react-icons/fa6';
 
 const services = [
-  { name: 'Web Development', icon: Monitor, description: 'Scalable & secure web applications.' },
-  { name: 'Mobile App Development', icon: Smartphone, description: 'Native & cross-platform mobile apps.' },
-  { name: 'UI/UX Design', icon: Palette, description: 'Intuitive and engaging user experiences.' },
-  { name: 'AI Solutions', icon: BrainCircuit, description: 'Intelligent automation and AI integration.' },
-  { name: 'Data Analytics', icon: LineChart, description: 'Actionable insights from your data.' },
-  { name: 'Cloud Services', icon: Cloud, description: 'Reliable and scalable cloud architecture.' },
-  { name: 'Digital Marketing', icon: Target, description: 'Data-driven marketing strategies.' },
-  { name: 'IT Consulting', icon: Briefcase, description: 'Expert guidance for your tech strategy.' },
+  { name: 'Development', icon: Code2, description: 'Web, mobile, SaaS & custom software.' },
+  { name: 'AI Solutions', icon: Bot, description: 'Chatbots, RAG, AI agents & ML models.' },
+  { name: 'Data & Analytics', icon: BarChart3, description: 'Dashboards, BI & data engineering.' },
+  { name: 'Cloud & DevOps', icon: Cloud, description: 'AWS, Azure, GCP, CI/CD & Kubernetes.' },
+  { name: 'Cybersecurity', icon: ShieldCheck, description: 'Audits, pen testing & IAM.' },
+  { name: 'UI/UX & Brand Design', icon: Palette, description: 'Product design & brand identity.' },
+  { name: 'Growth & Marketing', icon: TrendingUp, description: 'SEO, performance & content marketing.' },
+  { name: 'Business Consulting', icon: Briefcase, description: 'Tech strategy & fractional CTO.' },
+  { name: 'Business Automation', icon: Workflow, description: 'CRM, WhatsApp & AI workflow automation.' },
+  { name: 'Managed Services', icon: Wrench, description: 'Maintenance, support & cloud ops.' },
 ];
 
 const navLinks = [
   { name: 'Home', href: '/#home', isActive: true },
-  { name: 'Services', href: '/#services', hasDropdown: true },
   { name: 'About Us', href: '/#about' },
+  { name: 'Services', href: '/#services', hasDropdown: true },
   { name: 'Contact', href: '/#contact' },
 ];
 
@@ -150,19 +154,19 @@ export default function Navbar() {
                         transition={{ duration: 0.25, ease: "easeOut" }}
                         className="absolute left-1/2 -translate-x-1/2 top-full mt-4 w-[600px] bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden"
                       >
-                        <div className="p-6 grid grid-cols-2 gap-4">
+                        <div className="p-5 grid grid-cols-2 gap-2">
                           {services.map((service, idx) => (
                             <a 
                               key={idx} 
-                              href={`/services/${service.name.toLowerCase().replace(/[\s/]+/g, '-')}`}
-                              className="flex items-start gap-4 p-3 rounded-xl hover:bg-gray-50 transition-colors duration-200 group/item"
+                              href={`/#services`}
+                              className="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors duration-200 group/item"
                             >
-                              <div className="mt-1 bg-blue-50 p-2 rounded-lg group-hover/item:bg-blue-100 transition-colors">
-                                <service.icon className="w-5 h-5 text-blue-600" />
+                              <div className="mt-0.5 w-8 h-8 bg-[#F3F4F6] rounded-lg flex items-center justify-center shrink-0 group-hover/item:bg-[#111827] transition-colors">
+                                <service.icon className="w-4 h-4 text-[#111827] group-hover/item:text-white transition-colors" strokeWidth={1.75} />
                               </div>
                               <div>
-                                <h4 className="text-[15px] font-semibold text-gray-900 mb-1">{service.name}</h4>
-                                <p className="text-[13px] text-gray-500 line-clamp-1">{service.description}</p>
+                                <h4 className="text-[14px] font-semibold text-gray-900 mb-0.5">{service.name}</h4>
+                                <p className="text-[12px] text-gray-400 line-clamp-1">{service.description}</p>
                               </div>
                             </a>
                           ))}
