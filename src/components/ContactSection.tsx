@@ -1,7 +1,35 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Mail, Phone, MapPin } from 'lucide-react';
 
 export default function ContactSection() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const recipient = 'info.eimere@gmail.com';
+    const name = `${firstName} ${lastName}`.trim();
+    const subject = name ? `Inquiry from ${name}` : 'Inquiry from EIMERE Website';
+
+    const bodyParts: string[] = [];
+    if (name) bodyParts.push(`Name: ${name}`);
+    if (email) bodyParts.push(`Sender Email: ${email}`);
+    if (message) {
+      bodyParts.push('');
+      bodyParts.push('Message:');
+      bodyParts.push(message);
+    }
+
+    const body = bodyParts.join('\n');
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipient)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <section id="contact" className="bg-white py-20 lg:py-24 overflow-hidden scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -91,13 +119,15 @@ export default function ContactSection() {
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
             className="flex-1 bg-white p-8 sm:p-10 rounded-3xl border border-gray-200 shadow-xl shadow-gray-200/40 relative"
           >
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label htmlFor="firstName" className="text-sm font-medium text-[#111827]">First Name</label>
                   <input 
                     type="text" 
                     id="firstName" 
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#111827] focus:border-transparent transition-all outline-none"
                     placeholder="John"
                   />
@@ -107,6 +137,8 @@ export default function ContactSection() {
                   <input 
                     type="text" 
                     id="lastName" 
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#111827] focus:border-transparent transition-all outline-none"
                     placeholder="Doe"
                   />
@@ -118,6 +150,8 @@ export default function ContactSection() {
                 <input 
                   type="email" 
                   id="email" 
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#111827] focus:border-transparent transition-all outline-none"
                   placeholder="john@company.com"
                 />
@@ -128,6 +162,8 @@ export default function ContactSection() {
                 <textarea 
                   id="message" 
                   rows={4}
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                   className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#111827] focus:border-transparent transition-all outline-none resize-none"
                   placeholder="Tell us about your project or challenges..."
                 />
