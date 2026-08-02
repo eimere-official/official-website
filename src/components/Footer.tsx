@@ -61,8 +61,8 @@ export default function Footer() {
   const renderLink = (link: FooterLink) => {
     if (link.type === 'route') {
       return (
-        <Link 
-          key={link.label} 
+        <Link
+          key={link.label}
           to={link.href}
           className="block text-sm text-gray-500 hover:text-[#111827] transition-colors duration-200"
         >
@@ -70,9 +70,9 @@ export default function Footer() {
         </Link>
       );
     }
-    
+
     return (
-      <a 
+      <a
         key={link.label}
         href={link.href}
         className="block text-sm text-gray-500 hover:text-[#111827] transition-colors duration-200"
@@ -83,7 +83,7 @@ export default function Footer() {
   };
 
   return (
-    <motion.footer 
+    <motion.footer
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -92,13 +92,13 @@ export default function Footer() {
     >
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-12 lg:gap-8 mb-16">
-          
+
           {/* Column 1: Brand */}
           <div className="lg:pr-8 flex flex-col items-start">
             <a href="/" className="flex items-center gap-2 mb-4 group">
-              <img 
-                src="/logo.svg" 
-                alt="EIMERE Logo" 
+              <img
+                src="/logo.svg"
+                alt="EIMERE Logo"
                 className="h-7 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03]"
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
@@ -109,7 +109,7 @@ export default function Footer() {
                 EIMERE
               </span>
             </a>
-            
+
             <p className="font-bold text-base text-[#111827] mb-2 leading-snug">
               Engineering Intelligence. Empowering Enterprises.
             </p>
@@ -142,17 +142,17 @@ export default function Footer() {
               Stay in the loop
             </h4>
             <form onSubmit={handleSubscribe} className="flex items-center w-full max-w-[340px] relative">
-              <input 
-                type="email" 
+              <input
+                type="email"
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
                   if (status === 'error') setStatus('idle');
                 }}
-                placeholder="Your email" 
+                placeholder="Your email"
                 className={`w-full py-2.5 pl-4 pr-28 text-sm rounded-full border ${status === 'error' ? 'border-red-400' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-gray-200 transition-colors`}
               />
-              <button 
+              <button
                 type="submit"
                 className="absolute right-1 top-1 bottom-1 px-4 text-xs font-semibold rounded-full border border-gray-900 bg-white text-[#111827] hover:bg-[#111827] hover:text-white transition-all duration-200"
               >
@@ -178,8 +178,8 @@ export default function Footer() {
             <div className="flex flex-col gap-3.5 mb-6">
               {serviceLinks.map(renderLink)}
             </div>
-            <Link 
-              to="/services" 
+            <Link
+              to="/services"
               className="group inline-flex items-center gap-1 text-sm font-semibold text-[#111827] hover:text-blue-600 transition-colors"
             >
               View all
@@ -195,8 +195,8 @@ export default function Footer() {
             <div className="flex flex-col gap-3.5 mb-6">
               {industryLinks.map(renderLink)}
             </div>
-            <Link 
-              to="/industries" 
+            <Link
+              to="/industries"
               className="group inline-flex items-center gap-1 text-sm font-semibold text-[#111827] hover:text-blue-600 transition-colors mb-8"
             >
               View all
@@ -217,17 +217,24 @@ export default function Footer() {
               Contact
             </h3>
             <div className="flex flex-col gap-4 mb-8">
-              <a href="mailto:hello@eimere.com" className="flex items-center gap-3 text-sm text-gray-500 hover:text-[#111827] transition-colors group">
+              <a
+                href="mailto:info.eimere@gmail.com"
+                className="flex items-center gap-3 text-sm text-gray-500 hover:text-[#111827] transition-colors group"
+              >
                 <Mail className="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-colors" />
-                hello@eimere.com
+                info.eimere@gmail.com
               </a>
-              <a href="tel:+1800EIMERE" className="flex items-center gap-3 text-sm text-gray-500 hover:text-[#111827] transition-colors group">
+
+              <a
+                href="tel:+919025032244"
+                className="flex items-center gap-3 text-sm text-gray-500 hover:text-[#111827] transition-colors group"
+              >
                 <Phone className="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-colors" />
-                +1 (800) EIMERE
+                +91 90250 32244
               </a>
             </div>
-            
-            <a 
+
+            <a
               href="/#contact"
               className="inline-block px-6 py-2.5 text-sm font-semibold rounded-full border border-gray-900 bg-white text-[#111827] hover:bg-[#111827] hover:text-white transition-all duration-250 hover:scale-[1.02]"
             >
