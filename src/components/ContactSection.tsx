@@ -51,8 +51,8 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <div className="text-sm font-medium text-gray-500">Email Us</div>
-                  <a href="mailto:hello@eimere.com" className="text-base font-semibold text-[#111827] hover:text-blue-600 transition-colors">
-                    hello@eimere.com
+                  <a href="mailto:info.eimere@gmail.com" className="text-base font-semibold text-[#111827] hover:text-blue-600 transition-colors">
+                    info.eimere@gmail.com
                   </a>
                 </div>
               </div>
@@ -63,8 +63,8 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <div className="text-sm font-medium text-gray-500">Call Us</div>
-                  <a href="tel:+15551234567" className="text-base font-semibold text-[#111827] hover:text-blue-600 transition-colors">
-                    +1 (555) 123-4567
+                  <a href="tel:+91 90250 32244" className="text-base font-semibold text-[#111827] hover:text-blue-600 transition-colors">
+                    +91 90250 32244
                   </a>
                 </div>
               </div>
@@ -76,7 +76,7 @@ export default function ContactSection() {
                 <div>
                   <div className="text-sm font-medium text-gray-500">Headquarters</div>
                   <span className="text-base font-semibold text-[#111827]">
-                    San Francisco, CA
+                    Tamil Nadu, India
                   </span>
                 </div>
               </div>
