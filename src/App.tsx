@@ -3,12 +3,14 @@ import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import ServicesPage from './pages/ServicesPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import TermsAndConditionsPage from './pages/TermsAndConditionsPage';
 import PlaceholderPage from './pages/PlaceholderPage';
 import Footer from './components/Footer';
 
 // Component to handle scrolling to hash links when routing
 function ScrollToHashElement() {
-  const { hash } = useLocation();
+  const { pathname, hash } = useLocation();
   
   useEffect(() => {
     if (hash) {
@@ -21,7 +23,7 @@ function ScrollToHashElement() {
     } else {
       window.scrollTo(0, 0);
     }
-  }, [hash]);
+  }, [pathname, hash]);
 
   return null;
 }
@@ -44,6 +46,10 @@ function App() {
             <Route path="/case-studies/:id" element={<PlaceholderPage />} />
             <Route path="/about" element={<PlaceholderPage />} />
             <Route path="/contact" element={<PlaceholderPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="/privacy" element={<PrivacyPolicyPage />} />
+            <Route path="/terms-and-conditions" element={<TermsAndConditionsPage />} />
+            <Route path="/terms" element={<TermsAndConditionsPage />} />
             <Route path="*" element={<PlaceholderPage />} />
           </Routes>
         </div>

@@ -248,11 +248,11 @@ export default function Footer() {
         <div className="border-t border-gray-200 pt-8 mt-12 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
           <p>© {new Date().getFullYear()} EIMERE. All rights reserved.</p>
           <div className="flex items-center gap-6">
-            <Link to="/privacy" className="hover:text-gray-900 transition-colors">
+            <Link to="/privacy-policy" className="hover:text-gray-900 transition-colors">
               Privacy Policy
             </Link>
-            <Link to="/terms" className="hover:text-gray-900 transition-colors">
-              Terms of Service
+            <Link to="/terms-and-conditions" className="hover:text-gray-900 transition-colors">
+              Terms & Conditions
             </Link>
           </div>
         </div>
