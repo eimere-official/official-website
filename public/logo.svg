@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 455 120" fill="currentColor">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-25 -10 500 120" fill="currentColor">
   <!-- E 1 -->
-  <rect x="0" y="0" width="60" height="18" />
-  <rect x="0" y="41" width="60" height="18" />
-  <rect x="0" y="82" width="60" height="18" />
+  <rect x="-15" y="0" width="75" height="18" />
+  <rect x="-15" y="41" width="75" height="18" />
+  <rect x="-15" y="82" width="75" height="18" />
 
   <!-- I -->
   <polygon points="85,0 95,0 95,100 75,100 75,18" />
@@ -11,17 +11,17 @@
   <polygon points="110,100 110,0 135,0 150,60 165,0 190,0 190,100 170,100 170,40 150,100 130,40 130,100" />
 
   <!-- E 2 -->
-  <rect x="205" y="0" width="60" height="18" />
-  <rect x="205" y="41" width="60" height="18" />
-  <rect x="205" y="82" width="60" height="18" />
+  <rect x="205" y="0" width="75" height="18" />
+  <rect x="205" y="41" width="75" height="18" />
+  <rect x="205" y="82" width="75" height="18" />
 
   <!-- R -->
-  <rect x="280" y="0" width="20" height="100" />
-  <path d="M 305 0 L 330 0 A 29.5 29.5 0 0 1 359.5 29.5 A 29.5 29.5 0 0 1 330 59 L 305 59 L 305 41 L 330 41 A 11.5 11.5 0 0 0 341.5 29.5 A 11.5 11.5 0 0 0 330 18 L 305 18 Z" />
-  <polygon points="315,41 335,41 360,100 340,100" />
+  <rect x="295" y="0" width="20" height="100" />
+  <path d="M 320 0 L 345 0 A 29.5 29.5 0 0 1 374.5 29.5 A 29.5 29.5 0 0 1 345 59 L 320 59 L 320 41 L 345 41 A 11.5 11.5 0 0 0 356.5 29.5 A 11.5 11.5 0 0 0 345 18 L 320 18 Z" />
+  <polygon points="330,41 350,41 375,100 355,100" />
 
   <!-- E 3 -->
-  <rect x="375" y="0" width="60" height="18" />
-  <rect x="375" y="41" width="60" height="18" />
-  <rect x="375" y="82" width="60" height="18" />
+  <rect x="390" y="0" width="75" height="18" />
+  <rect x="390" y="41" width="75" height="18" />
+  <rect x="390" y="82" width="75" height="18" />
 </svg>
