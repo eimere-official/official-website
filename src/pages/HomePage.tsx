@@ -5,7 +5,6 @@ import ServicesGrid from '../components/ServicesGrid';
 import IndustriesSection from '../components/IndustriesSection';
 import WhyEimereSection from '../components/WhyEimereSection';
 import HowWeWorkSection from '../components/HowWeWorkSection';
-import ExpertTeamSection from '../components/ExpertTeamSection';
 import ResultsSection from '../components/ResultsSection';
 import CommitmentSection from '../components/CommitmentSection';
 import ContactSection from '../components/ContactSection';
@@ -37,10 +36,6 @@ export default function HomePage() {
       
       <div id="process">
         <HowWeWorkSection />
-      </div>
-      
-      <div id="team">
-        <ExpertTeamSection />
       </div>
       
       <div id="case-studies">

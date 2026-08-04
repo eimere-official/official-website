@@ -35,7 +35,7 @@ export default function HeroSection() {
             border: '1px solid rgba(0,0,0,0.09)',
             background: 'rgba(255,255,255,0.88)',
             backdropFilter: 'blur(12px)',
-            marginBottom: '2.5rem',
+            marginBottom: '1.5rem',
           }}
         >
           <motion.span
@@ -53,7 +53,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, scale: 0.87, filter: 'blur(14px)' }}
           animate={{ opacity: 1, scale: 1,    filter: 'blur(0px)'  }}
           transition={{ duration: 1.05, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-          style={{ width: '100%', display: 'flex', justifyContent: 'center', marginBottom: '1.85rem' }}
+          style={{ width: '100%', display: 'flex', justifyContent: 'center', marginBottom: '1.25rem' }}
         >
           <img
             src="/logo.svg"
@@ -70,7 +70,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, scaleX: 0 }}
           animate={{ opacity: 1, scaleX: 1 }}
           transition={{ duration: 0.65, delay: 0.46, ease: [0.16, 1, 0.3, 1] }}
-          style={{ display: 'flex', alignItems: 'center', gap: '0.7rem', marginBottom: '1.65rem', transformOrigin: 'center' }}
+          style={{ display: 'flex', alignItems: 'center', gap: '0.7rem', marginBottom: '1.25rem', transformOrigin: 'center' }}
         >
           <div style={{ width: 56, height: 1, background: 'linear-gradient(to right, transparent, #CBCDD5)' }} />
           <motion.div
@@ -92,7 +92,7 @@ export default function HeroSection() {
             letterSpacing: '0.22em',
             textTransform: 'uppercase',
             color: '#0F0F16',
-            marginBottom: '2.9rem',
+            marginBottom: '1.75rem',
             lineHeight: 1.7,
           }}
         >
@@ -158,12 +158,12 @@ export default function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4, duration: 0.7 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none"
+        className="absolute bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none"
         style={{ zIndex: 2 }}
       >
         <span style={{
           fontSize: '0.57rem', letterSpacing: '0.3em', textTransform: 'uppercase',
-          color: '#A9ABB7', marginBottom: '0.65rem', fontWeight: 500,
+          color: '#A9ABB7', marginBottom: '0.4rem', fontWeight: 500,
         }}>
           Scroll to Explore
         </span>
