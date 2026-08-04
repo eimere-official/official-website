@@ -36,7 +36,7 @@ export default function PrivacyPolicyPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="pt-28 pb-12 sm:pt-36 sm:pb-16 px-5 sm:px-12 lg:px-20 border-b border-gray-100 bg-white">
+      <section className="pt-28 pb-3 sm:pt-36 sm:pb-4 px-5 sm:px-12 lg:px-20 border-b border-gray-100 bg-white">
         <div className="max-w-[1400px] mx-auto w-full">
           <motion.p
             initial={{ opacity: 0 }}
@@ -58,7 +58,7 @@ export default function PrivacyPolicyPage() {
       </section>
 
       {/* Main Content - Left Aligned Document Layout */}
-      <section className="px-5 sm:px-12 lg:px-20 py-14 sm:py-24">
+      <section className="px-5 sm:px-12 lg:px-20 pt-4 sm:pt-6 pb-14 sm:pb-24">
         <div className="max-w-[1400px] mx-auto w-full">
           <div className="max-w-4xl space-y-12 sm:space-y-14">
             {privacySections.map((item, index) => (

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ChevronDown,
@@ -11,10 +12,10 @@ import { FaLinkedinIn, FaInstagram, FaFacebookF, FaXTwitter } from 'react-icons/
 import { serviceCategories } from '../data/servicesData';
 
 const navLinks = [
-  { name: 'Home', href: '/#home', isActive: true },
-  { name: 'About Us', href: '/#about' },
-  { name: 'Services', href: '/services', hasDropdown: true },
-  { name: 'Contact', href: '/#contact' },
+  { name: 'Home', href: '/#home', id: 'home' },
+  { name: 'About Us', href: '/#about', id: 'about' },
+  { name: 'Services', href: '/services', id: 'services', hasDropdown: true },
+  { name: 'Contact', href: '/#contact', id: 'contact' },
 ];
 
 const socialLinks = [
@@ -40,19 +41,53 @@ const itemVariants = {
 };
 
 export default function Navbar() {
+  const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileExpandedCat, setMobileExpandedCat] = useState<string | null>(null);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>('home');
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
+
+      if (location.pathname !== '/') {
+        if (location.pathname.startsWith('/services')) {
+          setActiveSection('services');
+        } else {
+          setActiveSection('');
+        }
+        return;
+      }
+
+      const sectionIds = ['home', 'about', 'services', 'contact'];
+      const scrollPosition = window.scrollY + 200;
+      const isAtBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 50);
+
+      if (isAtBottom) {
+        setActiveSection('contact');
+        return;
+      }
+
+      let current = 'home';
+      for (const id of sectionIds) {
+        const element = document.getElementById(id);
+        if (element) {
+          const top = element.offsetTop;
+          if (scrollPosition >= top) {
+            current = id;
+          }
+        }
+      }
+      setActiveSection(current);
     };
+
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   return (
     <>
@@ -95,29 +130,31 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <div 
-                key={link.name}
-                className="relative group"
-                onMouseEnter={() => link.hasDropdown && setActiveDropdown(link.name)}
-                onMouseLeave={() => link.hasDropdown && setActiveDropdown(null)}
-              >
-                <a 
-                  href={link.href}
-                  className={`flex items-center gap-1 text-[17px] font-medium transition-colors duration-300 py-2 relative ${
-                    link.isActive ? 'text-gray-950' : 'text-gray-700 group-hover:text-gray-950'
-                  }`}
+            {navLinks.map((link) => {
+              const isActive = link.id === activeSection;
+              return (
+                <div 
+                  key={link.name}
+                  className="relative group"
+                  onMouseEnter={() => link.hasDropdown && setActiveDropdown(link.name)}
+                  onMouseLeave={() => link.hasDropdown && setActiveDropdown(null)}
                 >
-                  {link.name}
-                  {link.hasDropdown && (
-                    <ChevronDown className="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" />
-                  )}
-                </a>
-                
-                {/* Underline Animation */}
-                <span className={`absolute left-1/2 -translate-x-1/2 bottom-0 h-[2px] bg-black transition-all duration-300 ease-in-out ${
-                  link.isActive ? 'w-full' : 'w-0 group-hover:w-full'
-                }`} />
+                  <a 
+                    href={link.href}
+                    className={`flex items-center gap-1 text-[17px] font-medium transition-colors duration-300 py-2 relative ${
+                      isActive ? 'text-gray-950 font-semibold' : 'text-gray-700 group-hover:text-gray-950'
+                    }`}
+                  >
+                    {link.name}
+                    {link.hasDropdown && (
+                      <ChevronDown className="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" />
+                    )}
+                  </a>
+                  
+                  {/* Underline Animation */}
+                  <span className={`absolute left-1/2 -translate-x-1/2 bottom-0 h-[2px] bg-black transition-all duration-300 ease-in-out ${
+                    isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`} />
                 
                 {/* Full Mega Menu: All Categories + All Sub-services listed directly underneath */}
                 {link.hasDropdown && (
@@ -198,7 +235,8 @@ export default function Navbar() {
                   </AnimatePresence>
                 )}
               </div>
-            ))}
+            );
+          })}
           </div>
 
           {/* Right side: Button + Social Icons */}
@@ -275,14 +313,16 @@ export default function Navbar() {
                   exit="closed"
                   className="flex flex-col gap-6"
                 >
-                  {navLinks.map((link) => (
-                    <motion.div key={link.name} variants={itemVariants}>
-                      <div className="flex items-center justify-between group">
-                        <a
-                          href={link.href}
-                          className={`text-[17px] font-medium transition-colors ${
-                            link.isActive ? 'text-gray-900 font-semibold' : 'text-gray-900'
-                          }`}
+                  {navLinks.map((link) => {
+                    const isActive = link.id === activeSection;
+                    return (
+                      <motion.div key={link.name} variants={itemVariants}>
+                        <div className="flex items-center justify-between group">
+                          <a
+                            href={link.href}
+                            className={`text-[17px] font-medium transition-colors ${
+                              isActive ? 'text-gray-950 font-semibold' : 'text-gray-900'
+                            }`}
                           onClick={() => {
                             if (!link.hasDropdown) setIsMobileMenuOpen(false);
                           }}
@@ -342,7 +382,8 @@ export default function Navbar() {
                         </AnimatePresence>
                       )}
                     </motion.div>
-                  ))}
+                  );
+                })}
                   
                   {/* Mobile CTA Button */}
                   <motion.div variants={itemVariants} className="pt-4">
