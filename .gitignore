@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Antigravity skills (local only)
+.agents/
+skills-lock.json
