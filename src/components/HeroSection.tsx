@@ -1,5 +1,95 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+
+function DotGrid() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mouse = useRef({ x: -9999, y: -9999 });
+  const rafId = useRef(0);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const GAP    = 28;   // spacing between dots
+    const RADIUS = 1.5;  // base dot radius
+    const GLOW_R = 130;  // cursor influence radius
+
+    const resize = () => {
+      canvas.width  = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
+
+    resize();
+    const ro = new ResizeObserver(resize);
+    ro.observe(canvas);
+
+    const onMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    };
+    const onLeave = () => { mouse.current = { x: -9999, y: -9999 }; };
+
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseleave', onLeave);
+
+    const draw = () => {
+      const { width: w, height: h } = canvas;
+      ctx.clearRect(0, 0, w, h);
+
+      const mx = mouse.current.x;
+      const my = mouse.current.y;
+
+      const cols = Math.ceil(w / GAP) + 1;
+      const rows = Math.ceil(h / GAP) + 1;
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const x = c * GAP;
+          const y = r * GAP;
+
+          const dx   = x - mx;
+          const dy   = y - my;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const t    = Math.max(0, 1 - dist / GLOW_R);  // 0 → 1 as cursor nears
+
+          const alpha = 0.12 + t * 0.75;
+          const size  = RADIUS + t * 2.2;
+
+          ctx.beginPath();
+          ctx.arc(x, y, size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(100, 100, 130, ${alpha})`;
+          ctx.fill();
+        }
+      }
+
+      rafId.current = requestAnimationFrame(draw);
+    };
+
+    rafId.current = requestAnimationFrame(draw);
+
+    return () => {
+      cancelAnimationFrame(rafId.current);
+      ro.disconnect();
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseleave', onLeave);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      aria-hidden
+      style={{
+        position: 'absolute', inset: 0,
+        width: '100%', height: '100%',
+        zIndex: 0, pointerEvents: 'none',
+      }}
+    />
+  );
+}
 
 export default function HeroSection() {
   return (
@@ -8,20 +98,22 @@ export default function HeroSection() {
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
       style={{ background: '#FFFFFF' }}
     >
-      {/* Subtle center depth glow */}
+      <DotGrid />
+
+      {/* Center fade so dots don't clash with content */}
       <div
         aria-hidden
         style={{
-          position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
+          position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none',
           background:
-            'radial-gradient(ellipse 60% 50% at 50% 47%, rgba(234,234,250,0.70) 0%, transparent 70%)',
+            'radial-gradient(ellipse 60% 55% at 50% 47%, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.4) 60%, transparent 100%)',
         }}
       />
 
       {/* ── Hero content ── */}
       <div
         className="relative flex flex-col items-center text-center w-full max-w-4xl mx-auto px-6"
-        style={{ zIndex: 1 }}
+        style={{ zIndex: 2 }}
       >
         {/* Eyebrow pill */}
         <motion.div
@@ -33,8 +125,8 @@ export default function HeroSection() {
             padding: '0.38rem 1.05rem',
             borderRadius: '9999px',
             border: '1px solid rgba(0,0,0,0.09)',
-            background: 'rgba(255,255,255,0.88)',
-            backdropFilter: 'blur(12px)',
+            background: 'rgba(255,255,255,0.92)',
+            backdropFilter: 'blur(16px)',
             marginBottom: '1.5rem',
           }}
         >
@@ -51,7 +143,7 @@ export default function HeroSection() {
         {/* EIMERE Wordmark */}
         <motion.div
           initial={{ opacity: 0, scale: 0.87, filter: 'blur(14px)' }}
-          animate={{ opacity: 1, scale: 1,    filter: 'blur(0px)'  }}
+          animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
           transition={{ duration: 1.05, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
           style={{ width: '100%', display: 'flex', justifyContent: 'center', marginBottom: '1.25rem' }}
         >
@@ -115,10 +207,8 @@ export default function HeroSection() {
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               padding: '0.87rem 2.05rem',
               borderRadius: '0.5rem',
-              background: '#0F0F16',
-              color: '#fff',
-              fontWeight: 600,
-              fontSize: '0.9rem',
+              background: '#0F0F16', color: '#fff',
+              fontWeight: 600, fontSize: '0.9rem',
               letterSpacing: '0.025em',
               textDecoration: 'none',
               border: '2px solid #0F0F16',
@@ -137,10 +227,8 @@ export default function HeroSection() {
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               padding: '0.87rem 2.05rem',
               borderRadius: '0.5rem',
-              background: '#FFFFFF',
-              color: '#0F0F16',
-              fontWeight: 600,
-              fontSize: '0.9rem',
+              background: '#FFFFFF', color: '#0F0F16',
+              fontWeight: 600, fontSize: '0.9rem',
               letterSpacing: '0.025em',
               textDecoration: 'none',
               border: '2px solid #E1E3EA',
