@@ -1,12 +1,10 @@
 import HeroSection from '../components/HeroSection';
 import StatsBar from '../components/StatsBar';
-import WhatWeDo from '../components/WhatWeDo';
+import AboutSection from '../components/AboutSection';
 import ServicesGrid from '../components/ServicesGrid';
-import IndustriesSection from '../components/IndustriesSection';
 import WhyEimereSection from '../components/WhyEimereSection';
 import HowWeWorkSection from '../components/HowWeWorkSection';
 import ResultsSection from '../components/ResultsSection';
-import CommitmentSection from '../components/CommitmentSection';
 import ContactSection from '../components/ContactSection';
 import ClosingCTASection from '../components/ClosingCTASection';
 
@@ -19,16 +17,13 @@ export default function HomePage() {
       </div>
       
       <div id="about">
-        <WhatWeDo />
+        <AboutSection />
       </div>
       
       <div id="services">
         <ServicesGrid />
       </div>
       
-      <div id="industries">
-        <IndustriesSection />
-      </div>
       
       <div id="why-us">
         <WhyEimereSection />
@@ -40,10 +35,6 @@ export default function HomePage() {
       
       <div id="case-studies">
         <ResultsSection />
-      </div>
-      
-      <div id="commitment">
-        <CommitmentSection />
       </div>
       
       <ClosingCTASection />
